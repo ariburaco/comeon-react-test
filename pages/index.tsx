@@ -15,10 +15,10 @@ const Home: NextPage = () => {
   const { logoutHandler } = UseLoginHook();
 
   useEffect(() => {
-    if (!isLoggedIn || !player) {
+    if (!isLoggedIn) {
       router.push('/login');
     }
-  }, [isLoggedIn, player, router]);
+  }, []);
 
   return (
     <>

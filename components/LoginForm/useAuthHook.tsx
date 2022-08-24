@@ -1,11 +1,10 @@
 import { useRouter } from 'next/router';
 import { LoginData } from 'pages/api/login/login.type';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import useAuthState from 'store';
 import { toast } from 'react-hot-toast';
 
 const UseLoginHook = () => {
-  const isLoggedIn = useAuthState((state) => state.isLoggedIn);
   const player = useAuthState((state) => state.player);
   const setLoginStatus = useAuthState((state) => state.setLoginStatus);
   const setPlayer = useAuthState((state) => state.setPlayer);
@@ -13,14 +12,6 @@ const UseLoginHook = () => {
   const [password, setPassword] = useState('');
 
   const router = useRouter();
-
-  useEffect(() => {
-    if (isLoggedIn && player !== undefined) {
-      setTimeout(() => {
-        router.push('/');
-      }, 2000);
-    }
-  }, [isLoggedIn, player, router]);
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -46,6 +37,7 @@ const UseLoginHook = () => {
       toast.success(`Welcome ${loginResponse.player!.name}`);
       setLoginStatus(true);
       setPlayer(loginResponse.player!);
+      router.push('/');
     } else {
       toast.error(`Username or password is incorrect`);
       setLoginStatus(false);
@@ -66,6 +58,7 @@ const UseLoginHook = () => {
       toast.success(`Goodbye ${player!.name}`);
       setLoginStatus(false);
       setPlayer(undefined);
+      router.push('/login');
     } else {
       toast.error(`Something went wrong while logging out`);
     }

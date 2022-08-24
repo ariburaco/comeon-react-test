@@ -3,7 +3,7 @@
 
 import { Player } from 'mock/types';
 import create from 'zustand';
-import { devtools } from 'zustand/middleware';
+import { devtools, persist } from 'zustand/middleware';
 
 interface AuthState {
   isLoggedIn: boolean;
@@ -13,12 +13,17 @@ interface AuthState {
 }
 
 const useAuthState = create<AuthState>()(
-  devtools((set) => ({
-    isLoggedIn: false,
-    player: undefined,
-    setLoginStatus: (isLoggedIn) => set(() => ({ isLoggedIn })),
-    setPlayer: (player) => set(() => ({ player })),
-  }))
+  persist(
+    devtools((set) => ({
+      isLoggedIn: false,
+      player: undefined,
+      setLoginStatus: (isLoggedIn) => set(() => ({ isLoggedIn })),
+      setPlayer: (player) => set(() => ({ player })),
+    })),
+    {
+      name: 'auth',
+    }
+  )
 );
 
 export default useAuthState;
