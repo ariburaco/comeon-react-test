@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router';
 import { LoginData } from 'pages/api/login/login.type';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import useAuthState from 'store';
 import { toast } from 'react-hot-toast';
 
 const UseLoginHook = () => {
+  const isLoggedIn = useAuthState((state) => state.isLoggedIn);
+
   const player = useAuthState((state) => state.player);
   const setLoginStatus = useAuthState((state) => state.setLoginStatus);
   const setPlayer = useAuthState((state) => state.setPlayer);
@@ -12,6 +14,12 @@ const UseLoginHook = () => {
   const [password, setPassword] = useState('');
 
   const router = useRouter();
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      router.push('/');
+    }
+  }, []);
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
