@@ -18,7 +18,7 @@ const UseLoginHook = () => {
     if (isLoggedIn && player !== undefined) {
       setTimeout(() => {
         router.push('/');
-      }, 1000);
+      }, 2000);
     }
   }, [isLoggedIn, player, router]);
 
@@ -43,7 +43,7 @@ const UseLoginHook = () => {
 
     const loginResponse = (await loginRequest.json()) as LoginData;
     if (loginResponse.status === 'success') {
-      toast.success(`Welcome ${loginResponse.player!.username}`);
+      toast.success(`Welcome ${loginResponse.player!.name}`);
       setLoginStatus(true);
       setPlayer(loginResponse.player!);
     } else {
@@ -53,12 +53,31 @@ const UseLoginHook = () => {
     }
   };
 
+  const logoutHandler = async () => {
+    const logoutRequest = await fetch('/api/logout', {
+      method: 'POST',
+      body: JSON.stringify({
+        username: player!.username,
+      }),
+    });
+
+    const logoutResponse = (await logoutRequest.json()) as LoginData;
+    if (logoutResponse.status === 'success') {
+      toast.success(`Goodbye ${player!.name}`);
+      setLoginStatus(false);
+      setPlayer(undefined);
+    } else {
+      toast.error(`Something went wrong while logging out`);
+    }
+  };
+
   return {
     username,
     password,
     handleUsernameChange,
     handlePasswordChange,
     handleSubmit,
+    logoutHandler,
   };
 };
 export default UseLoginHook;
