@@ -13,7 +13,7 @@ export interface Game {
 
 export interface Player {
   name: string;
-  slug: string;
+  username: string;
   avatar: string;
   event: string;
   password: string;

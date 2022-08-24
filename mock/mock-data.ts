@@ -61,21 +61,21 @@ export const categories: Category[] = [
 export const players: Player[] = [
   {
     name: 'Rebecka Awesome',
-    slug: 'rebecka',
+    username: 'rebecka',
     avatar: '/images/avatar/rebecka.jpg',
     event: 'Last seen gambling on Starburst.',
     password: 'secret',
   },
   {
     name: 'Eric Beard',
-    slug: 'eric',
+    username: 'eric',
     avatar: '/images/avatar/eric.jpg',
     event: 'I saw you won 500 SEK last time!',
     password: 'dad',
   },
   {
     name: 'Stoffe Rocker',
-    slug: 'stoffe',
+    username: 'stoffe',
     avatar: '/images/avatar/stoffe.jpg',
     event: 'Your are a rock star',
     password: 'rock',
