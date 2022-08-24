@@ -16,11 +16,10 @@ const UseLoginHook = () => {
 
   useEffect(() => {
     if (isLoggedIn && player !== undefined) {
-      setTimeout(() => {
-        router.push('/');
-      }, 2000);
+      router.push('/');
     }
-  }, [isLoggedIn, player, router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn, player]);
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
