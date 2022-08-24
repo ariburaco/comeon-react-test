@@ -1,15 +1,8 @@
-import type { AppProps } from 'next/app';
-import { Provider, useCreateStore } from 'store';
 import '../styles/globals.css';
+import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const createStore = useCreateStore(pageProps.initialZustandState);
-
-  return (
-    <Provider createStore={createStore}>
-      <Component {...pageProps} />;
-    </Provider>
-  );
+  return <Component {...pageProps} />;
 }
 
 export default MyApp;

@@ -26,7 +26,6 @@ const LoginForm: FunctionComponent = () => {
           name="username"
           value={username}
           onChange={handleUsernameChange}
-          autoComplete="username"
           placeholder="Username"
           className="py-2 pl-4 pr-8 bg-white rounded-sm border-[1px] border-base-100/40 focus:border-base-100/80 input-sm outline-none"
         />
@@ -41,7 +40,6 @@ const LoginForm: FunctionComponent = () => {
           type="password"
           name="password"
           value={password}
-          autoComplete="current-password"
           onChange={handlePasswordChange}
           placeholder="Password"
           className="max-w-lg py-2 pl-4 pr-8 bg-white rounded-sm border-[1px] border-base-100/40 focus:border-base-100/80 input-sm outline-none"
