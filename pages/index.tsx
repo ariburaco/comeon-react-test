@@ -2,15 +2,23 @@
 import Header from 'components/Header';
 import UseLoginHook from 'components/LoginForm/useAuthHook';
 import type { NextPage } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import useAuthState from 'store';
+import { initializeStore, useStore } from 'store';
+import shallow from 'zustand/shallow';
 
 const Home: NextPage = () => {
-  const isLoggedIn = useAuthState((state) => state.isLoggedIn);
-  const player = useAuthState((state) => state.player);
+  const { isLoggedIn, player } = useStore(
+    (store) => ({
+      isLoggedIn: store.isLoggedIn,
+      player: store.player,
+    }),
+    shallow
+  );
+
   const router = useRouter();
   const { logoutHandler } = UseLoginHook();
 
@@ -18,7 +26,7 @@ const Home: NextPage = () => {
     if (!isLoggedIn || !player) {
       router.push('/login');
     }
-  }, [isLoggedIn, player, router]);
+  }, [isLoggedIn, player]);
 
   return (
     <>
@@ -30,7 +38,7 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-      <div className="container flex flex-col items-center justify-start gap-2 px-10 mx-auto">
+      <div className="container flex flex-col items-center justify-start gap-2 px-5 mx-auto">
         <Header />
         {isLoggedIn && (
           <div className="flex flex-col items-start justify-start w-full p-6 bg-white rounded-md">
@@ -68,3 +76,23 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+// You should use getServerSideProps when:
+// - Only if you need to pre-render a page whose data must be fetched at request time
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const zustandStore = initializeStore();
+  const initialState = JSON.parse(JSON.stringify(zustandStore.getState()));
+
+  console.log(
+    '🚀 ~ file: index.tsx ~ line 79 ~ constgetServerSideProps:GetServerSideProps= ~ initialState',
+    initialState
+  );
+  return {
+    props: {
+      // the "stringify and then parse again" piece is required as next.js
+      // isn't able to serialize it to JSON properly
+      initialZustandState: initialState,
+    },
+  };
+};

@@ -1,57 +1,61 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
-
-import { Player } from 'mock/types';
-import create, { StoreApi, UseBoundStore } from 'zustand';
-import { combine, devtools, persist } from 'zustand/middleware';
-import createContext from 'zustand/context';
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect } from "react";
+import create, { UseBoundStore } from "zustand";
+import createContext from "zustand/context";
+import { combine } from "zustand/middleware";
 
 let store: any;
-type InitialState = AuthState;
+
+type InitialState = ReturnType<typeof getDefaultInitialState>;
 type UseStoreState = typeof initializeStore extends (
   ...args: never
 ) => UseBoundStore<infer T>
   ? T
   : never;
 
-interface AuthState {
-  isLoggedIn: boolean;
-  player: Player | undefined;
-}
-
-const getDefaultInitialState = () =>
-  ({
-    isLoggedIn: false,
-    player: {},
-  } as AuthState);
+const getDefaultInitialState = () => ({
+  lastUpdate: Date.now(),
+  light: false,
+  count: 0,
+});
 
 const zustandContext = createContext<UseStoreState>();
-
-export const { Provider, useStore } = zustandContext;
+export const Provider = zustandContext.Provider;
+export const useStore = zustandContext.useStore;
 
 export const initializeStore = (preloadedState = {}) => {
   return create(
-    persist(
-      combine(
-        { ...getDefaultInitialState(), ...preloadedState },
-        (set, get) => ({
-          isLoggedIn: false,
-          player: {} as Player,
-          setLoginStatus: (isLoggedIn: boolean) => set(() => ({ isLoggedIn })),
-          setPlayer: (player: Player | undefined) => set(() => ({ player })),
-        })
-      ),
-      {
-        name: 'auth',
-      }
-    )
+    combine({ ...getDefaultInitialState(), ...preloadedState }, (set, get) => ({
+      reset2: () => {
+        set({ count: 100 });
+      },
+      tick: (lastUpdate: number, light: boolean) => {
+        set({
+          lastUpdate,
+          light: !!light,
+        });
+      },
+      increment: () => {
+        set({
+          count: get().count + 1,
+        });
+      },
+      decrement: () => {
+        set({
+          count: get().count - 1,
+        });
+      },
+      reset: () => {
+        set({
+          count: getDefaultInitialState().count,
+        });
+      },
+    }))
   );
 };
 
 export const useCreateStore = (serverInitialState: InitialState) => {
   // For SSR & SSG, always use a new store.
-  if (typeof window === 'undefined') {
+  if (typeof window === "undefined") {
     return () => initializeStore(serverInitialState);
   }
 
@@ -82,5 +86,3 @@ export const useCreateStore = (serverInitialState: InitialState) => {
 
   return () => store;
 };
-
-export default initializeStore;

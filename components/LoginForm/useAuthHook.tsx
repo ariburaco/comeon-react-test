@@ -1,14 +1,21 @@
 import { useRouter } from 'next/router';
 import { LoginData } from 'pages/api/login/login.type';
 import { useEffect, useState } from 'react';
-import useAuthState from 'store';
 import { toast } from 'react-hot-toast';
+import { useStore } from 'store';
+import shallow from 'zustand/shallow';
 
 const UseLoginHook = () => {
-  const isLoggedIn = useAuthState((state) => state.isLoggedIn);
-  const player = useAuthState((state) => state.player);
-  const setLoginStatus = useAuthState((state) => state.setLoginStatus);
-  const setPlayer = useAuthState((state) => state.setPlayer);
+  const { isLoggedIn, player, setLoginStatus, setPlayer } = useStore(
+    (store) => ({
+      isLoggedIn: store.isLoggedIn,
+      player: store.player,
+      setLoginStatus: store.setLoginStatus,
+      setPlayer: store.setPlayer,
+    }),
+    shallow
+  );
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
