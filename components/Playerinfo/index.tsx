@@ -1,4 +1,3 @@
-import Logout from 'components/Logout';
 import Image from 'next/image';
 import { FunctionComponent } from 'react';
 import { PlayerinfoProps } from './playerinfo.type';
@@ -22,7 +21,6 @@ const Playerinfo: FunctionComponent<PlayerinfoProps> = ({ player }) => {
           </p>
         </div>
       </div>
-      <Logout />
     </div>
   );
 };

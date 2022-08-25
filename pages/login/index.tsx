@@ -14,9 +14,9 @@ const LoginPage: FunctionComponent = () => {
         />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-      <div className="container flex flex-col items-center justify-start gap-2 mx-auto">
+      <div className="flex flex-col items-center justify-start gap-2 p-4 mx-auto">
         <Header />
-        <div className="flex justify-center w-3/4 py-20 mx-auto bg-white rounded-lg">
+        <div className="flex justify-center w-full py-20 mx-auto bg-white rounded-lg md:w-3/4">
           <LoginForm />
         </div>
       </div>

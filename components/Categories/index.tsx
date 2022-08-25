@@ -6,19 +6,13 @@ interface CategoriesProps {
 }
 
 const Categories: FunctionComponent<CategoriesProps> = ({ categories }) => {
-  // const [categories, setCategories] = useState<Category[]>([]);
-
-  // useEffect(() => {
-  //   getAllCategories().then((result) => setCategories(result));
-  // }, []);
-
   return (
-    <div className="prose max-w-none">
-      <h2 className="!text-zinc-900">Categories</h2>
+    <div className="flex flex-col gap-4">
+      <h2 className="text-xl font-bold text-zinc-900 ">Categories</h2>
       <ul>
         {categories.map((category) => (
           <li
-            className="font-bold no-underline link text-zinc-900 link-primary"
+            className="py-1 font-bold no-underline link text-zinc-900 link-primary"
             key={category.id}
           >
             {category.name}

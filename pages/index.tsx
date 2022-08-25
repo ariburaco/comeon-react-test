@@ -41,22 +41,22 @@ const Home: NextPage<IndexProps> = ({ categories, games: allGames }) => {
         />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-      <div className="container flex flex-col items-center justify-start gap-2 px-10 mx-auto">
+      <div className="flex flex-col items-center justify-start gap-2 px-4 mx-auto md:px-10">
         <Header />
         {isLoggedIn && (
-          <div className="flex flex-col items-start justify-start w-full gap-10 p-6 rounded-md bg-neutral text-base-300">
-            <div className="flex flex-col items-start justify-start w-full gap-4">
+          <div className="flex flex-col items-start justify-start w-full gap-10 p-6 rounded-md bg-neutral text-base-300 ">
+            <div className="flex flex-col items-start justify-start w-full gap-4 pb-6 border-b-2">
               <div className="flex flex-col items-center justify-between w-full gap-6 md:flex-row">
                 <Playerinfo player={player} />
                 <SearchBar />
               </div>
             </div>
 
-            <div className="grid w-full grid-rows-2 gap-10 md:grid-cols-4">
-              <div className="row-span-1 md:col-span-3">
+            <div className="grid w-full gap-10 md:grid-cols-4">
+              <div className="md:col-span-3">
                 <Games games={games} />
               </div>
-              <div className="row-span-1 md:col-span-1">
+              <div className="md:col-span-1">
                 <Categories categories={categories} />
               </div>
             </div>

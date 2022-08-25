@@ -23,7 +23,7 @@ const Games: FunctionComponent<GamesProps> = ({ games }) => {
                   height={144}
                 />
               </div>
-              <div className="flex flex-col items-end justify-between col-span-4">
+              <div className="flex flex-col items-end justify-between col-span-4 gap-6">
                 <div className="flex flex-col items-start justify-start gap-2">
                   <h1 className="text-base font-bold text-base-300">
                     {game.name}
@@ -33,7 +33,7 @@ const Games: FunctionComponent<GamesProps> = ({ games }) => {
                   </p>
                 </div>
                 <button type="submit" className="btn btn-primary ">
-                  <div className="flex items-center">
+                  <div className="flex items-center font-bold text-white">
                     <span>Play</span>
                     <ChevronRightIcon className="w-6 h-6" />
                   </div>
