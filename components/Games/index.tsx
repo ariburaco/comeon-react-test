@@ -1,6 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/no-array-index-key */
 import { ChevronRightIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
+import Link from 'next/link';
 import { FunctionComponent } from 'react';
 import { GamesProps } from './games.type';
 
@@ -32,12 +36,12 @@ const Games: FunctionComponent<GamesProps> = ({ games }) => {
                     {game.description}
                   </p>
                 </div>
-                <button type="submit" className="btn btn-primary ">
-                  <div className="flex items-center font-bold text-white">
+                <Link href={`/game?code=${game.code}`}>
+                  <a className="flex items-center font-bold text-white btn btn-primary">
                     <span>Play</span>
                     <ChevronRightIcon className="w-6 h-6" />
-                  </div>
-                </button>
+                  </a>
+                </Link>
               </div>
             </div>
           ))
