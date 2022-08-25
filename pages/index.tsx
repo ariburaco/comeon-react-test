@@ -3,6 +3,7 @@
 import Categories from 'components/Categories';
 import Games from 'components/Games';
 import Header from 'components/Header';
+import LoginForm from 'components/LoginForm';
 import Playerinfo from 'components/Playerinfo';
 import SearchBar from 'components/SearchBar';
 import { Category, Game } from 'mock/types';
@@ -43,7 +44,7 @@ const Home: NextPage<IndexProps> = ({ categories, games: allGames }) => {
       </Head>
       <div className="flex flex-col items-center justify-start gap-2 px-4 mx-auto md:px-10">
         <Header />
-        {isLoggedIn && (
+        {isLoggedIn === true ? (
           <div className="flex flex-col items-start justify-start w-full gap-10 p-6 rounded-md bg-neutral text-base-300 ">
             <div className="flex flex-col items-start justify-start w-full gap-4 pb-6 border-b-2">
               <div className="flex flex-col items-center justify-between w-full gap-6 md:flex-row">
@@ -60,6 +61,10 @@ const Home: NextPage<IndexProps> = ({ categories, games: allGames }) => {
                 <Categories categories={categories} />
               </div>
             </div>
+          </div>
+        ) : (
+          <div className="flex justify-center w-full py-20 mx-auto bg-white rounded-lg md:w-3/4">
+            <LoginForm />
           </div>
         )}
       </div>
