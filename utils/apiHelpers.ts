@@ -1,6 +1,7 @@
 import { Category, Game, Player } from 'mock/types';
 import { CategoriesData } from 'pages/api/categories/categories.type';
 import { GameData } from 'pages/api/games/games.type.';
+import { GetGamesByCategoryData } from 'pages/api/getGamesByCategory/getGamesByCategory.type';
 import { LoginData } from 'pages/api/login/login.type';
 
 const API_URL = process.env.NEXT_PUBLIC_URL || '';
@@ -15,6 +16,14 @@ export const getAllCategories = async () => {
   const request = await fetch(`${API_URL}/api/categories`);
   const response = (await request.json()) as CategoriesData;
   return (response.categories as Category[]) || [];
+};
+
+export const getGamesByCategory = async (id: number) => {
+  const request = await fetch(
+    `${API_URL}/api/getGamesByCategory?categoryId=${id}`
+  );
+  const response = (await request.json()) as GetGamesByCategoryData;
+  return (response.games as Game[]) || [];
 };
 
 export const loginCall = async (username: string, password: string) => {

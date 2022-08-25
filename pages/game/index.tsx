@@ -21,7 +21,7 @@ const GamePage: NextPage = () => {
         />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-      <div className="flex flex-col items-center justify-center w-full gap-4 m-10 mx-auto my-4">
+      <div className="flex flex-col items-center justify-center w-full gap-4 m-2 mx-auto my-4">
         <div className="flex">
           <Link href="/">
             <a className="flex items-center px-10 font-bold text-white btn btn-primary ">
@@ -31,7 +31,7 @@ const GamePage: NextPage = () => {
           </Link>
         </div>
         {source ? (
-          <div className="flex justify-center w-full h-screen px-20 ">
+          <div className="flex justify-center w-full px-4 h-96 ">
             <LaunchGame src={source} />
           </div>
         ) : (

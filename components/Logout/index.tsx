@@ -8,7 +8,7 @@ const Logout: FunctionComponent = () => {
     <button
       type="submit"
       onClick={() => logoutHandler()}
-      className="btn btn-sm btn-primary"
+      className="text-white btn btn-sm btn-primary"
     >
       Logout
     </button>

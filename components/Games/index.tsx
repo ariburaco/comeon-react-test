@@ -1,7 +1,4 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable react/no-array-index-key */
 import { ChevronRightIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,14 +8,13 @@ import { GamesProps } from './games.type';
 const Games: FunctionComponent<GamesProps> = ({ games }) => {
   return (
     <div className="flex">
-      <div className="flex flex-col items-start justify-start w-full gap-10">
+      <div className="flex flex-col items-start justify-start w-full gap-6">
+        <h1 className="text-2xl font-bold text-zinc-900">Games</h1>
+
         {games.length > 0 ? (
           games.map((game) => (
-            <div
-              key={game.code}
-              className="grid items-center gap-2 md:grid-cols-5"
-            >
-              <div className="flex justify-center col-span-1">
+            <div key={game.code} className="grid items-center md:grid-cols-5">
+              <div className="flex justify-start col-span-1">
                 <Image
                   priority
                   src={game!.icon}

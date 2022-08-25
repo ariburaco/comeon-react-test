@@ -1,3 +1,4 @@
+import Logout from 'components/Logout';
 import Image from 'next/image';
 import { FunctionComponent } from 'react';
 import { PlayerinfoProps } from './playerinfo.type';
@@ -5,7 +6,7 @@ import { PlayerinfoProps } from './playerinfo.type';
 const Playerinfo: FunctionComponent<PlayerinfoProps> = ({ player }) => {
   return (
     <div className="flex flex-col items-center justify-start gap-2 md:flex-row">
-      <div className="flex flex-row items-center gap-4">
+      <div className="flex flex-col items-center gap-4 md:flex-row">
         <Image
           priority
           className="rounded-full"
@@ -20,6 +21,7 @@ const Playerinfo: FunctionComponent<PlayerinfoProps> = ({ player }) => {
             {player!.event}
           </p>
         </div>
+        <Logout />
       </div>
     </div>
   );

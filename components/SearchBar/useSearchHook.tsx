@@ -10,8 +10,7 @@ const UseSearchHook = () => {
     setSearch(event.target.value);
   };
 
-  const onFormSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const onFormSubmit = async () => {
     const searchRequest = await fetch(`/api/search?game=${search}`);
     const searchResponse = (await searchRequest.json()) as SearchData;
 
