@@ -1,14 +1,10 @@
 import { games } from 'mock/mock-data';
-import { Game } from 'mock/types';
 import type { NextApiRequest, NextApiResponse } from 'next';
-
-type Data = {
-  games: Game[];
-};
+import { GameData } from './games.type.';
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<GameData>
 ) {
   res.status(200).json({
     games,

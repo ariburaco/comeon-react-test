@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import { LoginData } from 'pages/api/login/login.type';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useStore } from 'store';
+import { loginCall, logoutCall } from 'utils/apiHelpers';
 
 const useAuthHook = () => {
   const isLoggedIn = useStore((state) => state.isLoggedIn);
@@ -32,16 +32,8 @@ const useAuthHook = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    const loginResponse = await loginCall(username, password);
 
-    const loginRequest = await fetch('/api/login', {
-      method: 'POST',
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    });
-
-    const loginResponse = (await loginRequest.json()) as LoginData;
     if (loginResponse.status === 'success') {
       toast.success(`Welcome ${loginResponse.player!.name}`);
       setLoginStatus(true);
@@ -55,14 +47,7 @@ const useAuthHook = () => {
   };
 
   const logoutHandler = async () => {
-    const logoutRequest = await fetch('/api/logout', {
-      method: 'POST',
-      body: JSON.stringify({
-        username: player!.username,
-      }),
-    });
-
-    const logoutResponse = (await logoutRequest.json()) as LoginData;
+    const logoutResponse = await logoutCall(player!);
     if (logoutResponse.status === 'success') {
       toast.success(`Goodbye ${player!.name}`);
       setLoginStatus(false);

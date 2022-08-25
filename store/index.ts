@@ -3,6 +3,7 @@
 
 import { Game, Player } from 'mock/types';
 import { useEffect, useState } from 'react';
+import { getAllGames } from 'utils/apiHelpers';
 import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
@@ -22,7 +23,15 @@ export const authStore = create<AuthState>()(
       player: undefined,
       games: [],
       setLoginStatus: (isLoggedIn) => set(() => ({ isLoggedIn })),
-      setPlayer: (player) => set(() => ({ player })),
+      setPlayer: async (player) => {
+        set(() => ({ player }));
+        if (player === undefined) {
+          set(() => ({ games: [] }));
+        } else {
+          const games = await getAllGames();
+          set(() => ({ games }));
+        }
+      },
       setGames: (games) => set(() => ({ games })),
     })),
     {

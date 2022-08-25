@@ -13,14 +13,22 @@ module.exports = {
       {
         default: {
           "primary": "#8bb30c",
-          "secondary": "#58fcc5",
-          "accent": "#ea9fb3",
-          "neutral": "#23272F",
+
+          "secondary": "#F000B8",
+
+          "accent": "#37CDBE",
+
+          "neutral": "#FFFFFF",
+
           "base-100": "#444",
-          "info": "#4397DF",
-          "success": "#14AD73",
-          "warning": "#B59008",
-          "error": "#F4211A",
+
+          "info": "#3ABFF8",
+
+          "success": "#36D399",
+
+          "warning": "#FBBD23",
+
+          "error": "#F87272",
         },
       },
     ],
