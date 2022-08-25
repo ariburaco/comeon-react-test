@@ -25,12 +25,6 @@ export const authStore = create<AuthState>()(
       setLoginStatus: (isLoggedIn) => set(() => ({ isLoggedIn })),
       setPlayer: async (player) => {
         set(() => ({ player }));
-        if (player === undefined) {
-          set(() => ({ games: [] }));
-        } else {
-          const games = await getAllGames();
-          set(() => ({ games }));
-        }
       },
       setGames: (games) => set(() => ({ games })),
     })),

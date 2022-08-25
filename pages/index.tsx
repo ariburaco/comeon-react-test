@@ -5,29 +5,31 @@ import Games from 'components/Games';
 import Header from 'components/Header';
 import Playerinfo from 'components/Playerinfo';
 import SearchBar from 'components/SearchBar';
-import { Category } from 'mock/types';
+import { Category, Game } from 'mock/types';
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
 import { useStore } from 'store';
-import { getAllCategories } from 'utils/apiHelpers';
+import { getAllCategories, getAllGames } from 'utils/apiHelpers';
 
 interface IndexProps {
   categories: Category[];
+  games: Game[];
 }
 
 // eslint-disable-next-line react/prop-types
-const Home: NextPage<IndexProps> = ({ categories }) => {
+const Home: NextPage<IndexProps> = ({ categories, games: allGames }) => {
   const isLoggedIn = useStore((state) => state.isLoggedIn);
   const player = useStore((state) => state.player);
-  const games = useStore((state) => state.games);
+  const searchedGames = useStore((state) => state.games);
 
-  // const router = useRouter();
+  const [games, setGames] = useState<Game[]>(allGames);
 
-  // useEffect(() => {
-  //   if (!isLoggedIn) {
-  //     router.push('/login');
-  //   }
-  // }, [isLoggedIn]);
+  useEffect(() => {
+    if (searchedGames) {
+      setGames(searchedGames);
+    }
+  }, [searchedGames]);
 
   return (
     <>
@@ -67,7 +69,9 @@ const Home: NextPage<IndexProps> = ({ categories }) => {
 
 Home.getInitialProps = async () => {
   const categories = await getAllCategories();
+  const games = await getAllGames();
   return {
+    games,
     categories,
   };
 };
