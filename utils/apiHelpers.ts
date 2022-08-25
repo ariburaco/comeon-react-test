@@ -3,7 +3,7 @@ import { CategoriesData } from 'pages/api/categories/categories.type';
 import { GameData } from 'pages/api/games/games.type.';
 import { LoginData } from 'pages/api/login/login.type';
 
-const API_URL = 'http://localhost:3000' || '';
+const API_URL = process.env.NEXT_PUBLIC_URL || '';
 
 export const getAllGames = async () => {
   const request = await fetch(`${API_URL}/api/games`);
