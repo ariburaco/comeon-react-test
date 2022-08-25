@@ -5,7 +5,7 @@ import { PlayerinfoProps } from './playerinfo.type';
 
 const Playerinfo: FunctionComponent<PlayerinfoProps> = ({ player }) => {
   return (
-    <div className="flex flex-row items-center justify-start gap-4">
+    <div className="flex flex-col items-center justify-start gap-2 md:flex-row">
       <div className="flex flex-row items-center gap-4">
         <Image
           priority
@@ -15,9 +15,11 @@ const Playerinfo: FunctionComponent<PlayerinfoProps> = ({ player }) => {
           width={50}
           height={50}
         />
-        <div className="flex flex-col items-start justify-start text-base-300">
-          <h1 className="font-bold text-md">{player!.name}</h1>
-          <p className="text-sm font-semibold text-gray-500">{player!.event}</p>
+        <div className="flex flex-col items-start justify-start">
+          <h1 className="text-sm font-bold md:text-md">{player!.name}</h1>
+          <p className="text-xs font-semibold text-gray-500 md:text-sm">
+            {player!.event}
+          </p>
         </div>
       </div>
       <Logout />
