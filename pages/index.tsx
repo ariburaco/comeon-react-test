@@ -42,7 +42,7 @@ const Home: NextPage<IndexProps> = ({ categories, games: allGames }) => {
         />
         <link rel="icon" href="/images/favicon.ico" />
       </Head>
-      <div className="flex flex-col items-center justify-start gap-2 px-4 mx-auto md:px-10">
+      <div className="flex flex-col items-center justify-start gap-2 px-4 mx-auto mb-10 md:px-10">
         <Header />
         {isLoggedIn === true ? (
           <div className="flex flex-col items-start justify-start w-full gap-10 p-6 rounded-md bg-neutral text-base-300 ">
