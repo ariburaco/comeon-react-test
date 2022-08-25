@@ -4,7 +4,7 @@ import {
   LockClosedIcon,
   ChevronRightIcon,
 } from '@heroicons/react/outline';
-import UseLoginHook from './useAuthHook';
+import useAuthHook from './useAuthHook';
 
 const LoginForm: FunctionComponent = () => {
   const {
@@ -13,7 +13,7 @@ const LoginForm: FunctionComponent = () => {
     handleUsernameChange,
     handlePasswordChange,
     handleSubmit,
-  } = UseLoginHook();
+  } = useAuthHook();
   return (
     <form className="flex flex-col items-center justify-center gap-6">
       <label

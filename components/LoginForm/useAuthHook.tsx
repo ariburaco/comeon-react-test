@@ -1,15 +1,15 @@
 import { useRouter } from 'next/router';
 import { LoginData } from 'pages/api/login/login.type';
-import { useState, useEffect } from 'react';
-import useAuthState from 'store';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { useStore } from 'store';
 
-const UseLoginHook = () => {
-  const isLoggedIn = useAuthState((state) => state.isLoggedIn);
+const useAuthHook = () => {
+  const isLoggedIn = useStore((state) => state.isLoggedIn);
+  const player = useStore((state) => state.player);
+  const setLoginStatus = useStore((state) => state.setLoginStatus);
+  const setPlayer = useStore((state) => state.setPlayer);
 
-  const player = useAuthState((state) => state.player);
-  const setLoginStatus = useAuthState((state) => state.setLoginStatus);
-  const setPlayer = useAuthState((state) => state.setPlayer);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,7 +19,8 @@ const UseLoginHook = () => {
     if (isLoggedIn) {
       router.push('/');
     }
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggedIn]);
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -81,4 +82,4 @@ const UseLoginHook = () => {
     logoutHandler,
   };
 };
-export default UseLoginHook;
+export default useAuthHook;

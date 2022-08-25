@@ -1,24 +1,26 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/button-has-type */
+import Games from 'components/Games';
 import Header from 'components/Header';
-import UseLoginHook from 'components/LoginForm/useAuthHook';
+import Logout from 'components/Logout';
+import SearchBar from 'components/SearchBar';
+import Playerinfo from 'components/Playerinfo';
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import useAuthState from 'store';
+import { useStore } from 'store';
 
 const Home: NextPage = () => {
-  const isLoggedIn = useAuthState((state) => state.isLoggedIn);
-  const player = useAuthState((state) => state.player);
-  const router = useRouter();
-  const { logoutHandler } = UseLoginHook();
+  const isLoggedIn = useStore((state) => state.isLoggedIn);
+  const player = useStore((state) => state.player);
+  const games = useStore((state) => state.games);
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      router.push('/login');
-    }
-  }, []);
+  // const router = useRouter();
+
+  // useEffect(() => {
+  //   if (!isLoggedIn) {
+  //     router.push('/login');
+  //   }
+  // }, [isLoggedIn]);
 
   return (
     <>
@@ -35,30 +37,16 @@ const Home: NextPage = () => {
         {isLoggedIn && (
           <div className="flex flex-col items-start justify-start w-full p-6 bg-white rounded-md">
             <div className="flex flex-col items-start justify-start w-full gap-4">
-              <div className="flex flex-row items-center justify-start">
-                <div className="flex flex-row items-center gap-4">
-                  <Image
-                    priority
-                    className="rounded-full"
-                    src={player!.avatar}
-                    alt={player!.name}
-                    width={50}
-                    height={50}
-                  />
-                  <div className="flex flex-col items-start justify-start text-base-300">
-                    <h1 className="font-bold text-md">{player!.name}</h1>
-                    <p className="text-sm font-semibold text-gray-500">
-                      {player!.event}
-                    </p>
-                  </div>
-                  <button
-                    onClick={() => logoutHandler()}
-                    className="btn btn-secondary"
-                  >
-                    Logout
-                  </button>
-                </div>
+              <div className="flex flex-row items-center justify-between w-full">
+                <Playerinfo player={player} />
+                <SearchBar />
+                <Logout />
               </div>
+            </div>
+
+            <div className="flex flex-row items-start justify-start">
+              <Games games={games} />
+              <div className="flex">sdada</div>
             </div>
           </div>
         )}
