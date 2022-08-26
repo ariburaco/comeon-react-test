@@ -1,8 +1,13 @@
-import { Category, Game, Player } from 'mock/types';
-import { CategoriesData } from 'pages/api/categories/categories.type';
-import { GameData } from 'pages/api/games/games.type.';
-import { GetGamesByCategoryData } from 'pages/api/getGamesByCategory/getGamesByCategory.type';
-import { LoginData } from 'pages/api/login/login.type';
+import {
+  GameData,
+  Game,
+  CategoriesData,
+  Category,
+  GetGamesByCategoryData,
+  LoginData,
+  Player,
+  SearchData,
+} from 'types';
 
 const API_URL = process.env.NEXT_PUBLIC_URL || '';
 
@@ -49,4 +54,10 @@ export const logoutCall = async (player: Player) => {
 
   const logoutResponse = (await logoutRequest.json()) as LoginData;
   return logoutResponse;
+};
+
+export const searchGame = async (gameName: string) => {
+  const searchRequest = await fetch(`${API_URL}/api/search?game=${gameName}`);
+  const searchResponse = (await searchRequest.json()) as SearchData;
+  return (searchResponse.games as Game[]) || [];
 };

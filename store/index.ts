@@ -1,9 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-unused-vars */
-
-import { Game, Player } from 'mock/types';
-import { useEffect, useState } from 'react';
-import { getAllGames } from 'utils/apiHelpers';
+import { Game, Player } from 'types';
 import create from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 
@@ -11,20 +6,18 @@ interface AuthState {
   isLoggedIn: boolean;
   player: Player | undefined;
   games: Game[];
-  setLoginStatus: (isLoggedIn: boolean) => void;
-  setPlayer: (player: Player | undefined) => void;
+  setPlayer: (player: Player | undefined, isLoggedIn: boolean) => void;
   setGames: (games: Game[]) => void;
 }
 
-export const authStore = create<AuthState>()(
+export const useStore = create<AuthState>()(
   persist(
     devtools((set) => ({
       isLoggedIn: false,
       player: undefined,
       games: [],
-      setLoginStatus: (isLoggedIn) => set(() => ({ isLoggedIn })),
-      setPlayer: async (player) => {
-        set(() => ({ player }));
+      setPlayer: async (player, isLoggedIn) => {
+        set(() => ({ player, isLoggedIn }));
       },
       setGames: (games) => set(() => ({ games })),
     })),
@@ -34,10 +27,4 @@ export const authStore = create<AuthState>()(
   )
 );
 
-export const useStore = ((selector, compare) => {
-  const store = authStore(selector, compare);
-  const [hydrated, setHydrated] = useState(false);
-  useEffect(() => setHydrated(true), []);
-
-  return hydrated ? store : selector({} as AuthState);
-}) as typeof authStore;
+export default useStore;

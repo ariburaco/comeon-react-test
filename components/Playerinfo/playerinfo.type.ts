@@ -1,4 +1,4 @@
-import { Player } from 'mock/types';
+import { Player } from 'types';
 
 export interface PlayerinfoProps {
   player: Player | undefined;

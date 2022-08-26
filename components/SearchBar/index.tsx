@@ -1,6 +1,6 @@
 import { SearchIcon } from '@heroicons/react/outline';
+import UseSearchHook from 'hooks/useSearchHook';
 import { FunctionComponent } from 'react';
-import UseSearchHook from './useSearchHook';
 
 const SearchBar: FunctionComponent = () => {
   const { search, handleSearchChange, onFormSubmit } = UseSearchHook();
@@ -28,7 +28,7 @@ const SearchBar: FunctionComponent = () => {
       </label>
       <button
         type="submit"
-        className="text-white  btn btn-primary btn-sm"
+        className="text-white btn btn-primary btn-sm"
         onClick={() => onFormSubmit()}
       >
         Search

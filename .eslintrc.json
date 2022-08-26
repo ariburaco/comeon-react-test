@@ -17,6 +17,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
+    "jsx-a11y/anchor-is-valid": "off",
     "no-unused-vars": "warn",
     "react/react-in-jsx-scope": ["off"],
     "react/jsx-uses-react": ["off"],

@@ -1,5 +1,5 @@
+import useAuthHook from 'hooks/useAuthHook';
 import { FunctionComponent } from 'react';
-import useAuthHook from 'components/LoginForm/useAuthHook';
 
 const Logout: FunctionComponent = () => {
   const { logoutHandler } = useAuthHook();

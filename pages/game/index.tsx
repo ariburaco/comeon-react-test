@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { ChevronLeftIcon } from '@heroicons/react/outline';
 import LaunchGame from 'components/LaunchGame';
 import { NextPage } from 'next';
