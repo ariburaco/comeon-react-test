@@ -1,6 +1,6 @@
-import { games } from 'mock/mock-data';
+import { games } from 'mock-data';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { GetGamesByCategoryData } from './getGamesByCategory.type';
+import { GetGamesByCategoryData } from 'types';
 
 export default function handler(
   req: NextApiRequest,

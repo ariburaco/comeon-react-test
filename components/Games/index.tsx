@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { ChevronRightIcon } from '@heroicons/react/outline';
 import Image from 'next/image';
@@ -13,8 +14,11 @@ const Games: FunctionComponent<GamesProps> = ({ games }) => {
 
         {games.length > 0 ? (
           games.map((game) => (
-            <div key={game.code} className="grid items-center md:grid-cols-5">
-              <div className="flex justify-start col-span-1">
+            <div
+              key={game.code}
+              className="flex flex-col items-center justify-center gap-4 px-2 py-4 border-2 border-gray-200 rounded-md shadow-xl md:items-start md:p-4 md:gap-4 md:flex-row"
+            >
+              <div className="items-center justify-center min-w-fit">
                 <Image
                   priority
                   src={game!.icon}
@@ -23,7 +27,7 @@ const Games: FunctionComponent<GamesProps> = ({ games }) => {
                   height={144}
                 />
               </div>
-              <div className="flex flex-col items-end justify-between col-span-4 gap-6">
+              <div className="flex flex-col items-center justify-between gap-6 md:items-end">
                 <div className="flex flex-col items-start justify-start gap-2">
                   <h1 className="text-base font-bold text-base-300">
                     {game.name}
@@ -33,7 +37,7 @@ const Games: FunctionComponent<GamesProps> = ({ games }) => {
                   </p>
                 </div>
                 <Link href={`/game?code=${game.code}`}>
-                  <a className="flex items-center font-bold text-white btn btn-primary">
+                  <a className="flex items-center font-bold text-white btn btn-sm md:btn-md btn-primary">
                     <span>Play</span>
                     <ChevronRightIcon className="w-6 h-6" />
                   </a>

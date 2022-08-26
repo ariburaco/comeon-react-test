@@ -1,4 +1,4 @@
-import { Category, Game, Player } from './types';
+import { Game, Category, Player } from 'types';
 
 export const games: Game[] = [
   {

@@ -1,6 +1,6 @@
-import { categories } from 'mock/mock-data';
+import { categories } from 'mock-data';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { CategoriesData } from './categories.type';
+import { CategoriesData } from 'types';
 
 export default function handler(
   req: NextApiRequest,

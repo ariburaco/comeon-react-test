@@ -1,6 +1,6 @@
-import { SearchData } from 'pages/api/search/search.type';
 import { useState } from 'react';
 import { useStore } from 'store';
+import { searchGame } from 'utils/apiHelpers';
 
 const UseSearchHook = () => {
   const [search, setSearch] = useState('');
@@ -11,10 +11,8 @@ const UseSearchHook = () => {
   };
 
   const onFormSubmit = async () => {
-    const searchRequest = await fetch(`/api/search?game=${search}`);
-    const searchResponse = (await searchRequest.json()) as SearchData;
-
-    setGames(searchResponse.games);
+    const searchResponse = await searchGame(search);
+    setGames(searchResponse);
   };
 
   return { search, handleSearchChange, onFormSubmit };

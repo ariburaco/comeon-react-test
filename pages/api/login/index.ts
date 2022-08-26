@@ -1,7 +1,6 @@
-import { players } from 'mock/mock-data';
-import { Player } from 'mock/types';
+import { players } from 'mock-data';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { LoginData } from './login.type';
+import { LoginData, Player } from 'types';
 
 export default function handler(
   req: NextApiRequest,

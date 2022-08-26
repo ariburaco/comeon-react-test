@@ -1,13 +1,9 @@
-import { Category } from 'mock/types';
+import useGamesByCategoryHook from 'hooks/useGamesByCategoryHook';
 import { FunctionComponent } from 'react';
-import UseGamesByCategoryHook from './useGamesByCategoryHook';
-
-interface CategoriesProps {
-  categories: Category[];
-}
+import { CategoriesProps } from './categories.type';
 
 const Categories: FunctionComponent<CategoriesProps> = ({ categories }) => {
-  const { getGamesByCategoryHandler } = UseGamesByCategoryHook();
+  const { getGamesByCategoryHandler } = useGamesByCategoryHook();
 
   return (
     <div className="flex flex-col gap-6">
