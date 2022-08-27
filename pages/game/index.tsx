@@ -18,7 +18,7 @@ const GamePage: NextPage = () => {
           name="description"
           content="Comeon group assignment submission by ali burak ozden"
         />
-        <link rel="icon" href="/images/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col items-center justify-center w-full gap-4 m-2 mx-auto my-4">
         <div className="flex">

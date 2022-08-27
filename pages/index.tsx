@@ -18,10 +18,10 @@ interface HomeProps {
 
 const Home: NextPage<HomeProps> = ({ categories, allGames }: HomeProps) => {
   const { player, isLoggedIn, searchResult } = useHomeHook();
-  const [games, setGames] = useState<Game[]>(searchResult || allGames);
+  const [games, setGames] = useState<Game[]>(allGames || searchResult);
 
   useEffect(() => {
-    if (searchResult) {
+    if (searchResult && searchResult.length > 0) {
       setGames(searchResult);
     }
   }, [searchResult]);
@@ -38,7 +38,7 @@ const Home: NextPage<HomeProps> = ({ categories, allGames }: HomeProps) => {
           name="description"
           content="Comeon group assignment submission by ali burak ozden"
         />
-        <link rel="icon" href="/images/favicon.ico" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="flex flex-col items-center justify-start gap-2 px-4 mx-auto mb-10 md:px-10">
         <Header />

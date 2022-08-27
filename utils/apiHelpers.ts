@@ -9,7 +9,7 @@ import {
   SearchData,
 } from 'types';
 
-const API_URL = process.env.NEXT_PUBLIC_URL || '';
+const API_URL = process.env.NEXT_PUBLIC_URL;
 
 export const getAllGames = async () => {
   const request = await fetch(`${API_URL}/api/games`);
